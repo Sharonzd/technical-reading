@@ -162,21 +162,22 @@ Referer字段包含源信息、路径和查询字符串，不包含锚点、用�
 
 服务器发送网页的时候，通过 HTTP 头信息的Referrer-Policy告诉浏览器。
 
-Referrer-Policy: origin
+`Referrer-Policy: origin`
 
 **（2）**<meta>**标签**
 
 也可以使用<meta>标签，在网页头部设置。
 
-`<meta name="referrer" content="origin">`
+```
+<meta name="referrer" content="origin">
+```
 
 **（3）**referrerpolicy**属性**
 
 `<a>`、`<area>`、`<img>`、`<iframe>`和`<link>`标签，可以设置referrerpolicy 属性。
 
 ```
-<a href="..." referrerpolicy="origin"
-target="_blank">xxx</a>
+<a href="..." referrerpolicy="origin" target="_blank">xxx</a>
 ```
 
 
