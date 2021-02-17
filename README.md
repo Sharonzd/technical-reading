@@ -12,4 +12,5 @@
 因此以后以 git repository 的形式记录，一个目录对应一本书，希望能坚持输出~
 
 ## 目录
-1. [《学习 JavaScript 数据结构与算法》](./learning-javascript-data-structures-and-algorithms/00.overview.md)
+1. [《HTTP 权威指南》](./HTTP权威指南/00.overview.md)
+2. [《学习 JavaScript 数据结构与算法》](./learning-javascript-data-structures-and-algorithms/00.overview.md)
