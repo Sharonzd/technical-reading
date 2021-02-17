@@ -24,7 +24,7 @@ HTTP 报文是网络中的数据块，发送报文的称为上游，接受报文
 
 在 HTTP 请求的方法中，包含GET、HEAD、POST、PUT、TRACE、OPTIONS、DELETE，其中 GET 和 HEAD 为安全方法，POST 和 PUT 会包含主体，而PUT 和 DELETE 都因为要操作服务器所以不安全，会受到较大的限制。GET 和 POST 是安全的，OPTIONS 用于请求服务器所支持的方法，用来判定获取资源的最优方式。
 
-[参见 MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods/OPTIONS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods/OPTIONS)
+[参见 MDN options](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Methods/OPTIONS)
 
 `存疑：POST 什么情况下是 cacheable的？`
 
@@ -70,17 +70,17 @@ HTTP 报文是网络中的数据块，发送报文的称为上游，接受报文
 
 可缓存方法：指的是该请求的响应能被存储起来重用，GET、HEAD 和某些情况下的 POST 可以被缓存（参见：[https://tools.ietf.org/html/rfc7231#section-4.2.3](https://tools.ietf.org/html/rfc7231#section-4.2.3) + [https://tools.ietf.org/html/rfc7234](https://tools.ietf.org/html/rfc7234)）
 
-| HTTP方法 | 解释     | 安全方法                                      | 幂等方法 | 可缓存的方法  | 请求有主体                                    |      | 响应有主体 | 是否支持HTML表单 | Property |
-|:---------|:---------|:---------------------------------------------|:--------|:------------|:---------------------------------------------|:-----|:----------|:----------------|:---------|
-|          | GET      |                                              | √       | √           | √                                            | x    | √         |                 |          |
-|          | HEAD     | 请求资源的头部信息（可用于节约带宽）             | √       | √           | √                                            | x    | x         | x               |          |
-|          | OPTIONS  | 用于描述目标资源的通信选项                      | √       | √           | x                                            | x    | x         | x               |          |
-|          | PUT      | 使用请求中的负载创建或者替换目标资源             | x       | √           | x                                            | √    | x         | x               |          |
-|          | DELETE   | 删除指定资源                                  | x       | √           | x                                            | x    | √         |                 |          |
-|          | POST     |                                              | x       | x           | √ Only if freshness information is included  | √    | √         |                 |          |
-|          | CONNECT  | 建立一个到由目标资源标识的服务器的隧道           | x       | x           | x                                            | x    | √         | x               |          |
-|          | TRACE    | 沿着到目标资源的路径执行一个消息环回测试（debug） | √       | √           | x                                            | x    | √         | x               |          |
-|          | PATCH    | 对资源应用部分修改                             | x       | x           | x                                            | √    | x         | x               |          |
+| HTTP方法 | 解释                                         | 安全方法 | 幂等方法 | 可缓存的方法                                  | 请求有主体 | 响应有主体  | 是否支持HTML表单 |
+|:---------|:---------------------------------------------|:--------|:--------|:--------------------------------------------|:----------|:----------|:----------------|
+| GET      |                                              | √       | √       | √                                           | x         | √         |                 |
+| HEAD     | 请求资源的头部信息（可用于节约带宽）             | √       | √       | √                                           | x         | x         | x               |
+| OPTIONS  | 用于描述目标资源的通信选项                      | √       | √       | x                                           | x         | x         | x               |
+| PUT      | 使用请求中的负载创建或者替换目标资源             | x       | √       | x                                           | √         | x         | x               |
+| DELETE   | 删除指定资源                                  | x       | √       | x                                           | x         | √         |                 |
+| POST     |                                              | x       | x       | √ Only if freshness information is included | √         | √         |                 |
+| CONNECT  | 建立一个到由目标资源标识的服务器的隧道           | x       | x       | x                                           | x         | √         | x               |
+| TRACE    | 沿着到目标资源的路径执行一个消息环回测试（debug） | √       | √       | x                                           | x         | √         | x               |
+| PATCH    | 对资源应用部分修改                             | x       | x       | x                                           | √         | x         | x               |
 
 
 ## HTTP header
@@ -134,7 +134,7 @@ Rel="noreferrer"屏蔽 referer
 **（3）same-origin**
 
 链接到同源网址（协议+域名+端口
-都相同）时发送，否则不发送。注意，https://foo.com链接到http://foo.com也属于跨域。
+都相同）时发送，否则不发送。注意，`https://foo.com` 链接到 `http://foo.com` 也属于跨域。
 
 **（4）origin**
 
