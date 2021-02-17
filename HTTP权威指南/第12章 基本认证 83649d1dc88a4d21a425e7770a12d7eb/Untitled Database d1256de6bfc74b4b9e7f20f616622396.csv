@@ -1,5 +1,0 @@
-﻿步骤,首部,描述,方法/状态
-请求,,一个普通的请求,GET
-质询,WWW-Authenticate,服务端返回401拒绝，并使用WWW-Authenticate指定认证算法,401 Unauthorized
-授权,Authorization,客户端重新发出一个带Authorization首部的请求，用来说明认证算法、用户名、密码,GET
-成功,Authentication-Info,授权校验正确，服务端则返回文档。并且通过Authentication-Info首部返回一些授权的附加信息,200 OK

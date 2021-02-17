@@ -1,2 +1,0 @@
-﻿质询（服务端发给客户端）,"WWW-Authenticate: Basic realm=""Something"""
-响应（客户端发往服务端）,Authorization: Basic base64(username: password)
