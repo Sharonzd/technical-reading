@@ -36,7 +36,7 @@ HTTP 报文是网络中的数据块，发送报文的称为上游，接受报文
 
 3xx 是重定向的状态码
 
-今天讲一个状态码的小知识点：302 303 307的区别
+### 小知识点：302 303 307的区别
 
 302是 HTTP1.0中的状态码，那个时候它还被称作 Moved Temporarily。当HTTP1.0客户端发起一个 POST 请求，并且收到302重定向状态码的响应时，它可能会向响应中的指定的重定向 URL发起一个 GET 请求，而不是原来的 POST 请求。规范中明确了这是一个错误的行为。这个错误
 但是这样的错误实在是太多了，因此 HTTP1.1把1.0中 302 的行为拆成了303和307两个状态码，其中303就是明确的会将POST 请求转为 GET 请求，而307则是明确不对方法做任何改变，原样的重新发起一个指向重定向URL请求。
@@ -74,20 +74,8 @@ HTTP 报文是网络中的数据块，发送报文的称为上游，接受报文
 
 ## HTTP header
 
-参考资料：
-
-wikipedia：[https://en.wikipedia.org/wiki/List_of_HTTP_header_fields](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields)
-
-iana 注册：[https://www.iana.org/assignments/message-headers/message-headers.xhtml](https://www.iana.org/assignments/message-headers/message-headers.xhtml)
-
-Referer Policy：[https://w3c.github.io/webappsec-referrer-policy/](https://w3c.github.io/webappsec-referrer-policy/)
-
-阮一峰科普入门：[http://www.ruanyifeng.com/blog/2019/06/http-referer.html](http://www.ruanyifeng.com/blog/2019/06/http-referer.html)
-
-Referer always：[https://github.com/nystudio107/seomatic/issues/254](https://github.com/nystudio107/seomatic/issues/254)
-
-今天讲一个 HTTP header， referer。referer
-是用于提供当前请求的来源信息的字段，规范中承认了，由于拼写错误，少写了一个字母 r。
+## HTTP header 之 referer。
+referer 是用于提供当前请求的来源信息的字段，规范中承认了，由于拼写错误，少写了一个字母 r。
 
 但除了 header 的 referer 是错误拼写，其他的大部分场景比如用于获取
 referer 信息的 document.referrer 字段是正确的拼写，用于配置 referer
@@ -99,15 +87,11 @@ referer 信息，但是有些时候我们需要改变 referer 或者屏蔽 refer
 
 因此规范制定了 referer 策略，使得我们可以通过 meta 标签、或者 http 的 header Referrer-Policy 字段，或者链接标签的referrerpolicy属性，来配置 referr 的策略。有8中 referer 策略，其中**no-referrer-when-downgrade就是浏览器的默认行为，从字面意义可以看出来就是在请求降级的时候不要发送 referer，也就是说，**从 HTTPS 网址链接到 HTTP 网址，不发送Referer字段。
 
-通过查看 referer 我看到了几个出乎我意料的现象：谷歌通过 meta设置了 referer 为
+通过查看 referer 我看到了几个出乎我意料的现象：谷歌通过 meta 设置了 referer 为
 origin，这样从谷歌跳转的页面获取的 referer 信息就只包含 [www.google.com](http://www.google.com/) 。但是从百度的搜索引擎跳转到页面，能拿到完整的带有 query 信息的 url，看了百度的页面，是设置了
-referer 为 always，always 是一个已经被废弃的属性值，代表了无论什么情况都会携带完整的 referer 信息，即便是跳转到不安全的
-http 协议的网站也会带上。这样给百度1是会带来安全风险，2是由于搜索关键词被获取到了可能会导致站点分析关键词，可能会对 seo 作弊。不知道百度是疏漏还是怎么。
+referer 为 always，always 是一个已经被废弃的属性值，代表了无论什么情况都会携带完整的 referer 信息，即便是跳转到不安全的 http 协议的网站也会带上。这样给百度1是会带来安全风险，2是由于搜索关键词被获取到了可能会导致站点分析关键词，可能会对 seo 作弊。
 
-另一个不符合预期的现象是，咱们内网文档的地址都没有设置
-referer 策略，也就是说从内网跳到外网的地址，站点能拿到我们内网的网址，这也是有安全风险的。
-
-不知道是以上的安全风险是否已经在别的层面上规避了。
+<!--  todo 疏漏讨论-->
 
 由请求的发送方决定是否带上 referer 字段，用户在地址栏输入网址，或者选中浏览器书签，就不发送Referer字段。
 
@@ -173,13 +157,26 @@ Referrer-Policy: origin
 
 也可以使用<meta>标签，在网页头部设置。
 
-<meta name="referrer" content="origin">
+`<meta name="referrer" content="origin">`
 
 **（3）**referrerpolicy**属性**
 
-<a>、<area>、<img>、<iframe>和<link>标签，可以设置referrerpolicy 属性。
+`<a>`、`<area>`、`<img>`、`<iframe>`和`<link>`标签，可以设置referrerpolicy 属性。
 
+```
 <a href="..." referrerpolicy="origin"
 target="_blank">xxx</a>
+```
 
-不知道百度为什么没有禁用 referr
+
+### 参考资料：
+
+wikipedia：[https://en.wikipedia.org/wiki/List_of_HTTP_header_fields](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields)
+
+iana 注册：[https://www.iana.org/assignments/message-headers/message-headers.xhtml](https://www.iana.org/assignments/message-headers/message-headers.xhtml)
+
+Referer Policy：[https://w3c.github.io/webappsec-referrer-policy/](https://w3c.github.io/webappsec-referrer-policy/)
+
+阮一峰科普入门：[http://www.ruanyifeng.com/blog/2019/06/http-referer.html](http://www.ruanyifeng.com/blog/2019/06/http-referer.html)
+
+Referer always：[https://github.com/nystudio107/seomatic/issues/254](https://github.com/nystudio107/seomatic/issues/254)
