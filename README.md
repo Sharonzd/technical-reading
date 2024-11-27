@@ -1,4 +1,4 @@
-## Techinical Reading 是什么
+## Technical Reading 是什么
 计算机技术书籍阅读笔记。主要阅读前端相关书籍，也会阅读一些计算机基础知识、软件工程相关的书籍。
 
 ## 为什么开这个仓库
@@ -12,5 +12,5 @@
 因此以后以 git repository 的形式记录，一个目录对应一本书，希望能坚持输出~
 
 ## 目录
-1. [《HTTP 权威指南》](./HTTP权威指南/00.overview.md)
-2. [《学习 JavaScript 数据结构与算法》](./learning-javascript-data-structures-and-algorithms/00.overview.md)
+1. [《HTTP 权威指南》](《HTTP权威指南》/00.overview.md)
+2. [《学习 JavaScript 数据结构与算法》](《学习数据结构与算法》/00.overview.md)
